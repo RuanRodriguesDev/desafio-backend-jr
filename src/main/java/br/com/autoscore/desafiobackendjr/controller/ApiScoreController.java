@@ -1,19 +1,28 @@
 package br.com.autoscore.desafiobackendjr.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import br.com.autoscore.desafiobackendjr.service.ApiStore;
+import br.com.autoscore.desafiobackendjr.entity.Score;
+import br.com.autoscore.desafiobackendjr.service.ApiServiceStore;
 
+@RestController
+@RequestMapping("/veiculos")
 public class ApiScoreController {
-     private final ApiStore apiService;
 
-    public ApiScoreController(ApiStore apiService) {
-        this.apiService = apiService;
+    private ApiServiceStore apiServiceStore;
+
+    public ApiScoreController(ApiServiceStore apiServiceStore) {
+        this.apiServiceStore = apiServiceStore;
     }
 
-    @GetMapping("/score")
-    public String fetchData() {
-        String apiUrl = "https://my.api.mockaroo.com/veiculos?key=55ad1cd0&placa=";
-        return apiService.fetchDataFromApi(apiUrl);
+    @PostMapping
+    public ResponseEntity<Score> salvarVeiculo(@RequestBody Score score){
+        Score salvarScore = apiServiceStore.salvarVeiculo(score);
+        return ResponseEntity.ok(salvarScore);
     }
+    
 }
