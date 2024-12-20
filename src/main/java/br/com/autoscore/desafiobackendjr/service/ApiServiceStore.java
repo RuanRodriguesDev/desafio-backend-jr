@@ -1,17 +1,23 @@
 package br.com.autoscore.desafiobackendjr.service;
 
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
+import org.springframework.web.reactive.function.client.WebClient.Builder;
 
 import br.com.autoscore.desafiobackendjr.dto.ScoreDto;
 import br.com.autoscore.desafiobackendjr.entity.Score;
-import br.com.autoscore.desafiobackendjr.repository.ScoreReppository;
-
+import br.com.autoscore.desafiobackendjr.repository.ScoreRepository;
+@Service
 public class ApiServiceStore {
-    private  ScoreReppository scoreReppository;
+    private  ScoreRepository scoreReppository;
     private  WebClient.Builder webClientBuilder;
 
+
+    public ApiServiceStore(ScoreRepository scoreReppository, Builder webClientBuilder) {
+        this.scoreReppository = scoreReppository;
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public Score salvarVeiculo(Score score) {
         // Chama a API externa

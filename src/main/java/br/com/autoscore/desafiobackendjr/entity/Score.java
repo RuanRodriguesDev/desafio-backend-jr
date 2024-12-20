@@ -1,5 +1,7 @@
 package br.com.autoscore.desafiobackendjr.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,19 +13,32 @@ public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double cpf;
+   @JsonProperty("cpf")
+    private String cpf;
+
+    @JsonProperty("proprietario")
     private String proprietario;
+
+    @JsonProperty("placa")
     private String placa;
+
+    @JsonProperty("marca")
     private String marca;
+
+    @JsonProperty("modelo")
     private String modelo;
+
+    @JsonProperty("chassi")
     private String chassi;
-    private boolean licanciamento;
+
+    @JsonProperty("licenciamento")
+    private boolean licenciamento;
 
     public Score(){}
 
     
-    public Score(Long id, Double cpf, String proprietario, String placa, String marca, String modelo, String chassi,
-            boolean licanciamento) {
+    public Score(Long id, String cpf, String proprietario, String placa, String marca, String modelo, String chassi,
+            boolean licenciamento) {
         this.id = id;
         this.cpf = cpf;
         this.proprietario = proprietario;
@@ -31,7 +46,7 @@ public class Score {
         this.marca = marca;
         this.modelo = modelo;
         this.chassi = chassi;
-        this.licanciamento = licanciamento;
+        this.licenciamento = licenciamento;
     }
 
 
@@ -41,10 +56,10 @@ public class Score {
     public void setId(Long id) {
         this.id = id;
     }
-    public Double getCpf() {
+    public String getCpf() {
         return cpf;
     }
-    public void setCpf(Double cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
     public String getProprietario() {
@@ -77,10 +92,15 @@ public class Score {
     public void setChassi(String chassi) {
         this.chassi = chassi;
     }
-    public boolean isLicanciamento() {
-        return licanciamento;
+
+
+    public boolean isLicenciamento() {
+        return licenciamento;
     }
-    public void setLicanciamento(boolean licanciamento) {
-        this.licanciamento = licanciamento;
-    }   
+
+
+    public void setLicenciamento(boolean licenciamento) {
+        this.licenciamento = licenciamento;
+    }
+  
 }
