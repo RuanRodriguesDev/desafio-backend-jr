@@ -1,69 +1,73 @@
-# Desafio Back-end Jr. AutoSCORE
+<h1 align="center">
+  Desafio AutoScore
+</h1>
 
-## Avisos antes de começar
-- Crie um repositório publico no seu GitHub sem citar nada relacionado a AutoSCORE.
-- Faça seus commits no seu repositório.
-- Você poderá consultar o Google, Stackoverflow ou algum projeto particular na sua máquina.
+API para gerenciar tarefas (CRUD) que faz parte [desse desafio](https://github.com/simplify-liferay/desafio-junior-backend-simplify) para pessoas desenvolvedoras backend júnior, que se candidatam para a Simplify.
 
-### Sobre o ambiente da aplicação:
-- A linguagem de programação escolhida é Java 8 ou superior;
-- Deve ser usado o Framework Spring;
-- Recomendamos o uso dos seguintes projetos do ecossistema Spring: Spring Boot, Spring Web, Spring Data JPA;
-- Pode ser usado um dos seguintes bancos de dados: MySQL, PostgreSQL ou H2;
-- Este serviço deve ser RESTFul.
 
-## Objetivo
-Temos um cadastro de veículos onde precisaremos das seguintes informações: Proprietário, CPF Proprietário, Placa, Chassi, Marca, Modelo e Status do Licenciamento. CPF e Placa deverão ser únicos no sistema. Sendo assim, seu sistema deve permitir apenas um cadastro com o mesmo CPF ou Placa;
+## Tecnologias
+ 
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring MVC](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+- [SpringDoc OpenAPI 3](https://springdoc.org/v2/#spring-webflux-support)
+- [Mysql](https://dev.mysql.com/downloads/)
 
-Para um cadastro de um novo veículo, precisaremos passar apenas as seguintes informações: Proprietário, CPF e Placa. 
+## Práticas adotadas
 
-### Payload
-Faça uma proposta de payload, se preferir, temos um exemplo aqui:
+- SOLID, DRY, YAGNI, KISS
+- API REST
+- Consultas com Spring Data JPA
+- Injeção de Dependências
+- Tratamento de respostas de erro
+- Geração automática do Swagger com a OpenAPI 3
 
-POST: /veiculos
+## Como Executar
 
-```json
-{
-    "proprietario" : "José da Silva",
-    "cpf" : "203.397.390-53",
-    "placa" : "ABC1234"
-}
+- Clonar repositório git
+- Construir o projeto:
+```
+$ ./mvnw clean package
+```
+- Executar a aplicação:
+```
+$ java -jar target/todolist-0.0.1-SNAPSHOT.jar
 ```
 
-Antes de persistir os dados no banco de dados, deverá ser consultada uma API externa, onde obteremos os dados do veículo e se o mesmo está licenciado.
-Use este endereço para consultar os dados do veículo passando a placa: 
-GET (https://my.api.mockaroo.com/veiculos?key=55ad1cd0&placa=ABC1234)
+A API poderá ser acessada em [localhost:8080](http://localhost:8080).
+O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-Depois de persistido os dados, o retorno deverá consolidar os dados enviados juntamente com os dados obtidos da API Externa.
+## API Endpoints
 
-Exemplo: 
+Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie](https://httpie.io):
 
-```json
-{   "id" : 1,
-    "proprietario" : "José da Silva",
-    "cpf" : "203.397.390-53",
-    "placa" : "ABC1234",
-    "marca": "Chevrolet",
-    "modelo": "Suburban 1500",
-    "chassi": "5TDBKRFH2FS979708",
-    "licenciado": true
-}
+- Criar Tarefa
+- 
+$ Metodo Post http://localhost:8080/veiculos
+
+ ![Post-Todo ](https://github.com/user-attachments/assets/521ac654-0a4c-42e3-b739-98b284ae8237)
+
 ```
 
-# Avaliação
-Serão avaliados a sintaxe, as escolhas de bibliotecas e a funcionalidade da aplicação.
+- Listar Tarefas
+```
+$  Metodo Get http://localhost:8080/veiculos
+![Get-Todo ](https://github.com/user-attachments/assets/ea4a5436-64e8-47bb-b220-14116f1f833a)
 
-## O que será um Diferencial
-- Validação dos dados de entrada
-- Código limpo e organizado (nomenclatura, etc)
-- Modelagem de Dados
-- Tratamento de erros
-- Uso de Design Patterns
 
-# Materiais úteis (Referencia)
-- https://www.oracle.com/br/technical-resources/articles/dsl/crud-rest-sb2-hibernate.html
-- https://vitormoschetti.medium.com/primeiro-crud-com-spring-boot-5b7abd118ded
-- https://www.youtube.com/watch?v=biCJIlqA334
-- https://www.linkedin.com/pulse/consumindo-apis-com-java-e-spring-boot-usando-um-guia-dhionson/
-- https://github.com/marcosrebelo97/demo-rest-template
+```
 
+- Atualizar Tarefa
+```
+$ Metodo Put http://localhost:8080/veiculos/1
+![Put-Tudo](https://github.com/user-attachments/assets/1607af3d-96c2-432f-a8b4-a69015c55065)
+
+
+```
+
+- Remover Tarefa
+```
+Metodo Delete http://localhost:8080/veiculos/1
+![Delete-Todo ](https://github.com/user-attachments/assets/5330e54e-059d-48b8-883b-c2ad86ab826d)
+
+```

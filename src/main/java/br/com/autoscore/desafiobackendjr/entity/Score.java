@@ -7,13 +7,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "tb_score")
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   @JsonProperty("cpf")
+    @NotBlank(message = "CPF é obrigatório.")
+    @JsonProperty("cpf")
     private String cpf;
 
     @JsonProperty("proprietario")

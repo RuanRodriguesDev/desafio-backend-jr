@@ -2,9 +2,9 @@ package br.com.autoscore.desafiobackendjr.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.autoscore.desafiobackendjr.dto.ScoreDto;
 import br.com.autoscore.desafiobackendjr.entity.Score;
-import br.com.autoscore.desafiobackendjr.exception.GlobalExceptionHandler;
 import br.com.autoscore.desafiobackendjr.service.ApiServiceStore;
 import br.com.autoscore.desafiobackendjr.service.ScoreService;
 import jakarta.validation.Valid;
@@ -26,7 +25,6 @@ import jakarta.validation.Valid;
 @RequestMapping("/veiculos")
 public class ApiScoreController {
    
-    private GlobalExceptionHandler globalExceptionHandler;
 
     private ApiServiceStore apiServiceStore;
     private ScoreService scoreService;
@@ -42,10 +40,15 @@ public class ApiScoreController {
     }
 
     @PostMapping
-    public ResponseEntity<Score> salvarVeiculo(@RequestBody Score score){
-        Score salvarScore = apiServiceStore.salvarVeiculo(score);
-        return ResponseEntity.ok(salvarScore);
+    public ResponseEntity<List<ScoreDto>> criarVeiculo(@RequestBody Score score) {
+        return scoreService.salvarVeiculo(score);
     }
+
+    // @PostMapping
+    // public ResponseEntity<Score> salvarVeiculo(@RequestBody Score score){
+    //     Score salvarScore = (Score) apiServiceStore.salvarVeiculo(score);
+    //     return ResponseEntity.ok(salvarScore);
+    // }
 
     @GetMapping
      List<ScoreDto> listaVeiculo(){
@@ -59,8 +62,9 @@ public class ApiScoreController {
   
 
     @DeleteMapping("/{id}")
-    List<ScoreDto> deleteVeiculo(@PathVariable("id")Long id){
-        return  scoreService.deleteScore(id);
+    public ResponseEntity<Void> deletarVeiculosPorIds(@PathVariable("id")Long id) {
+        scoreService.deletarVeiculosPorIds(id);
+        return ResponseEntity.noContent().build();
     }
     
 }

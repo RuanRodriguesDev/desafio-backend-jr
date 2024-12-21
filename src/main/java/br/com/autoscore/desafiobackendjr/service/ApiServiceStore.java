@@ -1,6 +1,9 @@
 package br.com.autoscore.desafiobackendjr.service;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.Builder;
@@ -19,18 +22,27 @@ public class ApiServiceStore {
         this.webClientBuilder = webClientBuilder;
     }
 
-    public Score salvarVeiculo(Score score) {
+    public Map<String, String>  salvarVeiculo(Score score) {
         // Chama a API externa
         ScoreDto apiDados = consultarApiExterna(score.getPlaca());
-
-        // Atualiza o objeto Veiculo com os dados da API
+    
+        // Atualiza o objeto Score com os dados da API
         score.setProprietario(apiDados.getProprietario());
         score.setCpf(apiDados.getCpf());
         score.setPlaca(apiDados.getPlaca());
-
+    
         // Persiste no banco
-        return scoreReppository.save(score);
+        scoreReppository.save(score);
+    
+        // Retorna apenas os campos desejados
+        Map<String, String> response = new HashMap<>();
+        response.put("proprietario", score.getProprietario());
+        response.put("cpf", score.getCpf());
+        response.put("placa", score.getPlaca());
+    
+        return response;
     }
+    
 
     private ScoreDto consultarApiExterna(String placa) {
         String url = "https://my.api.mockaroo.com/veiculos?key=55ad1cd0&placa=" + placa;
@@ -43,4 +55,6 @@ public class ApiServiceStore {
             .bodyToMono(ScoreDto.class)
             .block(); // Bloqueia até que a resposta seja recebida
     }
+
+  
 }
