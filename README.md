@@ -45,14 +45,16 @@ Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie](htt
 - 
 $ Metodo Post http://localhost:8080/veiculos
 
- ![Post-Todo ](https://github.com/user-attachments/assets/521ac654-0a4c-42e3-b739-98b284ae8237)
+ ![Get-veiculos - AluraFilmes 22_12_2024 15_52_03](https://github.com/user-attachments/assets/d72d862d-e221-4751-8854-4f7e6650e77a)
+
 
 ```
 
 - Listar Tarefas
 ```
 $  Metodo Get http://localhost:8080/veiculos
-![Get-Todo ](https://github.com/user-attachments/assets/ea4a5436-64e8-47bb-b220-14116f1f833a)
+
+![Get-veiculos - AluraFilmes 22_12_2024 15_51_36](https://github.com/user-attachments/assets/bb16f589-effd-4e5f-9d4e-9fa8235ce7c6)
 
 
 ```
@@ -60,14 +62,16 @@ $  Metodo Get http://localhost:8080/veiculos
 - Atualizar Tarefa
 ```
 $ Metodo Put http://localhost:8080/veiculos/1
-![Put-Tudo](https://github.com/user-attachments/assets/1607af3d-96c2-432f-a8b4-a69015c55065)
 
+![Get-veiculos - AluraFilmes 22_12_2024 15_52_28](https://github.com/user-attachments/assets/3b058eb2-f490-4d85-8e7e-64b41755fb15)
 
 ```
 
 - Remover Tarefa
 ```
 Metodo Delete http://localhost:8080/veiculos/1
-![Delete-Todo ](https://github.com/user-attachments/assets/5330e54e-059d-48b8-883b-c2ad86ab826d)
+
+![Get-veiculos - AluraFilmes 22_12_2024 15_53_01](https://github.com/user-attachments/assets/f9e99fc6-5b20-48d7-9570-446a5e82a22b)
+
 
 ```
